@@ -3,18 +3,36 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Artist;
+use App\Models\Instagram;
+use App\Models\VideoDetailsInsert;
+use Illuminate\Support\Facades\View;
+
+
 
 class HomeController extends Controller
 {
+    public function __construct()
+    {
+        $artistlist = Artist::all();
+        View::share('artistlist', $artistlist);
+    }
+
     public function index()
     {
         return view('index');
     }
 
 
-    public function artist()
+    public function artist($slug = null)
     {
-        return view('artist');
+        $artistdetails = Artist::where('slug', $slug)->first();
+        $artsdetails = VideoDetailsInsert::orderBy('order_num', 'asc')->where('artist_id', $artistdetails->id)->get();
+        $artinstadetails = Instagram::orderBy('order_num', 'asc')->where('artistname_id', $artistdetails->id)->get();
+
+
+
+        return view('artist', compact('artistdetails', 'artsdetails', 'artinstadetails'));
     }
     public function blog()
     {

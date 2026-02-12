@@ -12,5 +12,12 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index')->name('home');
+    $router->resource('artists', ArtistController::class);
+    $router->resource('video-details-inserts', VideoDetailsInsertController::class);
+    $router->resource('instagrams', InstagramController::class);
+
+
+    $router->resource('product-categories', ProductCategoryController::class);
+    
 
 });

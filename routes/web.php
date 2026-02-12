@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[HomeController::class, 'index']);
 
-Route::get('artist',[HomeController::class, 'artist']);
+Route::get('artist/{slug?}',[HomeController::class, 'artist']);
 Route::get('blog',[HomeController::class, 'blog']);
 Route::get('blog-detail',[HomeController::class, 'blogDetail']);
 Route::get('contact',[HomeController::class, 'contact']);

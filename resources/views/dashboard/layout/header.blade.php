@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kawa Musics</title>
 
-    <link rel="icon" type="image/png" href="{{asset('assets/images/favicon.png')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/owl.theme.default.min.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('assets/css/all.min.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}" type="text/css">
+    <link rel="icon" type="image/png" href="{{ asset('assets/images/favicon.png') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/owl.theme.default.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css">
     <!-- <link rel="stylesheet" href="assets/css/aos.css" type="text/css"> -->
-    <link rel="stylesheet" href="{{asset('assets/webfonts')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('assets/css/responsive.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('assets/webfonts') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}" type="text/css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
@@ -37,29 +37,32 @@
             <div class="container">
                 <div class="headermn">
                     <nav class="navbar navbar-expand-lg p-0 align-items-center">
-                        <a class="navbar-brand" href="{{url('/')}}">
-                            <img src="{{asset('assets/images/logo.png')}}" alt="Main Logo">
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            <img src="{{ asset('assets/images/logo.png') }}" alt="Main Logo">
                         </a>
 
-                        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
 
-                            <img src="{{asset('assets/images/menu.png')}}" alt="Menu" class="menu-icon">
+                            <img src="{{ asset('assets/images/menu.png') }}" alt="Menu" class="menu-icon">
                         </button>
 
 
-                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                            aria-labelledby="offcanvasNavbarLabel">
                             <div class="offcanvas-header">
                                 <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
-                                    <img src="{{asset('assets/images/logo.png')}}" alt="navigation logo">
+                                    <img src="{{ asset('assets/images/logo.png') }}" alt="navigation logo">
                                 </h5>
-                                <button class="offcanvas-close-btn" type="button" data-bs-dismiss="offcanvas" aria-label="Close">
-                                    <img src="{{asset('assets/images/close.png')}}" alt="close">
+                                <button class="offcanvas-close-btn" type="button" data-bs-dismiss="offcanvas"
+                                    aria-label="Close">
+                                    <img src="{{ asset('assets/images/close.png') }}" alt="close">
                                 </button>
                             </div>
 
                             <div class="offcanvas-body align-items-center">
                                 <ul class="navbar-nav justify-content-center flex-grow-1">
-                                    <li class="nav-item"><a class="nav-link" href="{{url('/')}}">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Home</a></li>
 
 
                                     <li class="nav-item dropdown artist-dropdown">
@@ -69,18 +72,16 @@
 
                                         <div class="dropdown-menu artist-menu">
                                             <div class="artist-row">
+                                                @foreach ($artistlist as $artistlists)
+                                                    <a href="{{ url('artist/' . $artistlists->slug) }}"
+                                                        class="artist-card">
+                                                        <img src="{{ url('uploads/' . $artistlists->image) }}" alt="">
+                                                        <h6>{{$artistlists->artist_name}}</h6>
+                                                        <span>{{$artistlists->artist_role}}</span>
+                                                    </a>
+                                                @endforeach
 
-                                                <a href="{{url('artist')}}" class="artist-card">
-                                                    <img src="assets/images/image-1.png" alt="">
-                                                    <h6>Artist One</h6>
-                                                    <span>Lead Vocalist</span>
-                                                </a>
 
-                                                <a href="{{url('artist')}}" class="artist-card">
-                                                    <img src="assets/images/image-1.png" alt="">
-                                                    <h6>Artist Two</h6>
-                                                    <span>Folk Musician</span>
-                                                </a>
 
 
                                             </div>
@@ -97,13 +98,13 @@
                                         <div class="dropdown-menu artist-menu">
                                             <div class="artist-row">
 
-                                                <a href="{{url('product')}}" class="artist-card">
+                                                <a href="{{ url('product') }}" class="artist-card">
                                                     <img src="assets/images/music.jpg" alt="">
                                                     <h6>Instruments</h6>
 
                                                 </a>
 
-                                                <a href="{{url('product')}}" class="artist-card">
+                                                <a href="{{ url('product') }}" class="artist-card">
                                                     <img src="assets/images/purfume.jpg" alt="">
                                                     <h6>Perfumes</h6>
 
@@ -115,8 +116,10 @@
                                         </div>
                                     </li>
 
-                                    <li class="nav-item"><a class="nav-link" href="{{url('blog')}}">Blog</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="{{url('contact')}}">Contact Us</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{ url('blog') }}">Blog</a>
+                                    </li>
+                                    <li class="nav-item"><a class="nav-link" href="{{ url('contact') }}">Contact
+                                            Us</a></li>
 
                                 </ul>
 
