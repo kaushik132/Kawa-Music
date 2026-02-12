@@ -69,7 +69,8 @@
             <div class="container text-center">
 
                 <h2 class="section-title">
-                    The Kawa Legacy: <span class="heading-img"><img src="{{url('assets/images/heading.png')}}" alt="heading"></span>
+                    The Kawa Legacy: <span class="heading-img"><img src="{{ url('assets/images/heading.png') }}"
+                            alt="heading"></span>
                     Desert Soul, Global Rhythm
                 </h2>
 
@@ -85,36 +86,39 @@
                     <div class="col-lg-10">
                         <div class="image-stack">
 
-                            <div class="stack-img img-left">
-                                <img src="{{url('assets/images/image-1.png')}}" alt="">
-                                <div class="overlay">
-                                    <h6>Ravi Kumar</h6>
-                                    <a href="artist.php">View Profile</a>
-                                </div>
-                            </div>
+                            @foreach ($as as $index => $artist)
+                                @php
+                                    $positionClass = '';
 
-                            <div class="stack-img img-center">
-                                <img src="assets/images/image-2.jpg" alt="">
-                                <div class="overlay">
-                                    <h6>Ravi Kumar</h6>
-                                    <a href="artist.php">View Profile</a>
-                                </div>
-                            </div>
+                                    if ($index == 0) {
+                                        $positionClass = 'img-left';
+                                    } elseif ($index == 1) {
+                                        $positionClass = 'img-center';
+                                    } elseif ($index == 2) {
+                                        $positionClass = 'img-right';
+                                    }
+                                @endphp
 
-                            <div class="stack-img img-right">
-                                <img src="assets/images/image-3.jpg" alt="">
-                                <div class="overlay">
-                                    <h6>Ravi Kumar</h6>
-                                    <a href="artist.php">View Profile</a>
-                                </div>
-                            </div>
+                                @if ($index < 3)
+                                    <div class="stack-img {{ $positionClass }}">
+                                        <img src="{{ url('uploads/' . $artist->image) }}" alt="{{ $artist->alt }}">
+                                        <div class="overlay">
+                                            <h6>{{ $artist->artist_name }}</h6>
+                                            <a href="{{ url('artist/' . $artist->slug) }}">View Profile</a>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+
+
+
 
                         </div>
                     </div>
                 </div>
 
                 <div class="mt-2 md-mt-5">
-                    <a href="#musicians" class="simple-btn">
+                    <a href="{{ url('/') }}" class="simple-btn">
                         Meet the Musicians
                     </a>
 
@@ -332,7 +336,7 @@
                             <a href="#!">
                                 <div class="trad-img position-relative">
                                     <img src="assets/images/purfume.jpg" alt="">
-                                
+
                                 </div>
                                 <div class="trad-content">
                                     <span class="trad-main-badge">String Instrument</span>

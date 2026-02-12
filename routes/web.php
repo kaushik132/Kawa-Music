@@ -17,12 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[HomeController::class, 'index']);
 
 Route::get('artist/{slug?}',[HomeController::class, 'artist']);
-Route::get('blog',[HomeController::class, 'blog']);
-Route::get('blog-detail',[HomeController::class, 'blogDetail']);
+Route::get('blog/{slug?}',[HomeController::class, 'blog']);
+Route::get('blog-detail/{slug?}',[HomeController::class, 'blogDetail']);
 Route::get('contact',[HomeController::class, 'contact']);
 Route::get('privacy-policy',[HomeController::class, 'privacyPolicy']);
-Route::get('product',[HomeController::class, 'product']);
-Route::get('product-detail',[HomeController::class, 'productDetail']);
+Route::get('product/{slug?}',[HomeController::class, 'product']);
+Route::get('product-detail/{slug?}',[HomeController::class, 'productDetail']);
 
 
 

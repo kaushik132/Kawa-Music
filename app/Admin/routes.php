@@ -18,6 +18,12 @@ Route::group([
 
 
     $router->resource('product-categories', ProductCategoryController::class);
-    
+    $router->resource('products', ProductController::class);
+    $router->resource('product-filters', ProductFilterController::class);
+
+
+    $router->resource('blog-categories', BlogCategoryController::class);
+    $router->resource('blogs', BlogController::class);
+
 
 });

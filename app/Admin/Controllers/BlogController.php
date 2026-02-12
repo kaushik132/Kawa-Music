@@ -1,0 +1,96 @@
+<?php
+
+namespace App\Admin\Controllers;
+
+use OpenAdmin\Admin\Controllers\AdminController;
+use OpenAdmin\Admin\Form;
+use OpenAdmin\Admin\Grid;
+use OpenAdmin\Admin\Show;
+use \App\Models\Blog;
+use \App\Models\BlogCategory;
+
+class BlogController extends AdminController
+{
+    /**
+     * Title for current resource.
+     *
+     * @var string
+     */
+    protected $title = 'Blog';
+
+    /**
+     * Make a grid builder.
+     *
+     * @return Grid
+     */
+    protected function grid()
+    {
+        $grid = new Grid(new Blog());
+
+        $grid->column('id', __('Id'));
+        $grid->column('blogCategory.name', __('Blog category id'));
+        $grid->column('title', __('Title'));
+
+        $grid->column('image', __('Image'))->image('/uploads/', '70', '70');
+
+
+        return $grid;
+    }
+
+    /**
+     * Make a show builder.
+     *
+     * @param mixed $id
+     * @return Show
+     */
+    protected function detail($id)
+    {
+        $show = new Show(Blog::findOrFail($id));
+
+        $show->field('id', __('Id'));
+        $show->field('blog_category_id', __('Blog category id'));
+        $show->field('title', __('Title'));
+        $show->field('slug', __('Slug'));
+        $show->field('author', __('Author'));
+        $show->field('image', __('Image'));
+        $show->field('alt', __('Alt'));
+        $show->field('description', __('Description'));
+        $show->field('seo_title', __('Seo title'));
+        $show->field('seo_des', __('Seo des'));
+        $show->field('seo_key', __('Seo key'));
+        $show->field('is_active', __('Is active'));
+        $show->field('created_at', __('Created at'));
+        $show->field('updated_at', __('Updated at'));
+
+        return $show;
+    }
+
+    /**
+     * Make a form builder.
+     *
+     * @return Form
+     */
+    protected function form()
+    {
+        $form = new Form(new Blog());
+
+        $form->select('blog_category_id', __('Blog category id'))->options(BlogCategory::pluck('name', 'id'))->default(null)->rules('required');
+        $form->text('title', __('Title'));
+      $form->hidden('slug');
+
+        $form->saving(function (Form $form) {
+
+           $form->slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '-',trim($form->title)));
+        });
+        $form->text('author', __('Author'));
+        $form->image('image', __('Image'));
+        $form->text('alt', __('Alt'));
+        $form->ckeditor('description', __('Description'));
+        $form->textarea('seo_title', __('Seo title'));
+        $form->textarea('seo_des', __('Seo des'));
+        $form->textarea('seo_key', __('Seo key'));
+        $form->switch('is_active', __('Is active'))->default(1);
+
+        return $form;
+    }
+}

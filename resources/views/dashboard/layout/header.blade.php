@@ -98,17 +98,17 @@
                                         <div class="dropdown-menu artist-menu">
                                             <div class="artist-row">
 
-                                                <a href="{{ url('product') }}" class="artist-card">
-                                                    <img src="assets/images/music.jpg" alt="">
-                                                    <h6>Instruments</h6>
+                                                @foreach ($pf as $pfs)
+
+                                                <a href="{{ url('product/'. $pfs->slug) }}" class="artist-card">
+                                                    <img src="{{url('uploads/'.$pfs->image)}}" alt="{{$pfs->alt}}">
+                                                    <h6>{{$pfs->name}}</h6>
 
                                                 </a>
+                                                @endforeach
 
-                                                <a href="{{ url('product') }}" class="artist-card">
-                                                    <img src="assets/images/purfume.jpg" alt="">
-                                                    <h6>Perfumes</h6>
 
-                                                </a>
+
 
 
 
