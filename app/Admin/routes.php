@@ -26,4 +26,25 @@ Route::group([
     $router->resource('blogs', BlogController::class);
 
 
+
+// home page route
+    $router->resource('home-page-instagrams', HomePageInstagramController::class);
+    $router->resource('home-events', HomeEventController::class);
+    $router->resource('home-videos', HomeVideoController::class);
+    $router->resource('testimonials', TestimonialController::class);
+
+
+    // info
+    $router->resource('infos', InfoController::class);
+    $router->resource('contacts', ContactController::class);
+    $router->resource('inquiries', InquiryController::class);
+
+
+    // seo
+    $router->resource('seos', SeoController::class);
+
+
+
+
+
 });

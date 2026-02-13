@@ -36,14 +36,14 @@
 
         <div class="footer-contact">
           <span>✉</span>
-          <a href="mailto:info@kawamusic.com">info@kawamusic.com</a>
+          <a href="mailto:{{$info->email}}">{{$info->email}}</a>
         </div>
 
         <div class="footer-social">
-          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="#"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+          <a href="{{$info->facebook_link}}"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="{{$info->twitter_link}}"><i class="fa-brands fa-instagram"></i></a>
+          <a href="{{$info->youtube_link}}"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="{{$info->youtube_link}}"><i class="fa-brands fa-youtube"></i></a>
         </div>
 
 
@@ -68,7 +68,31 @@
 <!-- login pop form  -->
 
 
+<script>
+            document.addEventListener("DOMContentLoaded", function() {
 
+                document.querySelectorAll('.lang-options li').forEach(function(el) {
+                    el.addEventListener('click', function() {
+
+                        var lang = this.getAttribute('data-lang');
+
+                        var checkExist = setInterval(function() {
+                            var select = document.querySelector(".goog-te-combo");
+
+                            if (select) {
+                                select.value = lang;
+                                select.dispatchEvent(new Event('change'));
+                                clearInterval(checkExist);
+                            }
+                        }, 500);
+
+                        document.querySelector('.lang-selected').innerHTML =
+                            this.innerText + ' <i class="fa-solid fa-angle-down"></i>';
+                    });
+                });
+
+            });
+        </script>
 
 <!-- Bootstrap JS Bundle -->
 <script src="{{url('assets/js/jquery-3.6.1.min.js')}}" type="text/javascript"></script>

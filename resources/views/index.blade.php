@@ -36,22 +36,13 @@
 
             <div class="card-slider-wrapper">
                 <div class="owl-carousel cardCarousel">
-                    <div class="destination-card" data-location="Kolkata">
-                        <img src="{{ url('assets/images/hero-small-slider.jpg') }}" alt="hero small slider">
-                    </div>
 
-                    <div class="destination-card" data-location="Kolkata">
-                        <img src="{{ url('assets/images/hero-small-slider.jpg') }}" alt="hero small slider">
-                    </div>
-                    <div class="destination-card" data-location="Kolkata">
-                        <img src="{{ url('assets/images/hero-small-slider.jpg') }}" alt="hero small slider">
-                    </div>
-                    <div class="destination-card" data-location="Kolkata">
-                        <img src="{{ url('assets/images/hero-small-slider.jpg') }}" alt="hero small slider">
-                    </div>
-                    <div class="destination-card" data-location="Kolkata">
-                        <img src="{{ url('assets/images/hero-small-slider.jpg') }}" alt="hero small slider">
-                    </div>
+                    @foreach ($event as $homeevent)
+                        <div class="destination-card" data-location="{{ $homeevent->city_name }}">
+                            <img src="{{ url('uploads/' . $homeevent->image) }}" alt="{{ $homeevent->alt }}">
+                        </div>
+                    @endforeach
+
 
                 </div>
             </div>
@@ -165,41 +156,22 @@
                 <div class="thumb-main-parent position-relative">
                     <div class="thumb-slider owl-carousel">
 
-                        <div class="thumb-card">
-                            <a href="https://www.youtube.com/watch?v=UkrElSTuWTw&list=RDUkrElSTuWTw&start_radio=1"
-                                target="_blank">
-                                <img src="assets/images/heading.png">
-                                <span class="play-small"><img src="assets/images/Polygon 2.png" alt=""></span>
-                                <div class="thum-card-content">
-                                    <h6>Traditional Instruments Showcase</h6>
-                                    <small>1.8M Views</small>
-                                </div>
-                            </a>
-                        </div>
 
-                        <div class="thumb-card">
-                            <a href="https://www.youtube.com/watch?v=UkrElSTuWTw&list=RDUkrElSTuWTw&start_radio=1"
-                                target="_blank">
-                                <img src="assets/images/heading.png">
-                                <span class="play-small"><img src="assets/images/Polygon 2.png" alt=""></span>
-                                <div class="thum-card-content">
-                                    <h6>Traditional Instruments Showcase</h6>
-                                    <small>1.8M Views</small>
-                                </div>
-                            </a>
-                        </div>
+                        @foreach ($video as $v)
+                            <div class="thumb-card">
+                                <a href="{{ $v->video_url }}" target="_blank">
+                                    <img src="{{ url('uploads/' . $v->image) }}" alt="{{ $v->alt }}">
+                                    <span class="play-small"><img src="{{ asset('assets/images/Polygon 2.png') }}"
+                                            alt="Polygon"></span>
+                                    <div class="thum-card-content">
+                                        <h6>{{ $v->title }}</h6>
+                                        <small>{{ $v->views }} Views</small>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
 
-                        <div class="thumb-card">
-                            <a href="https://www.youtube.com/watch?v=UkrElSTuWTw&list=RDUkrElSTuWTw&start_radio=1"
-                                target="_blank">
-                                <img src="assets/images/heading.png">
-                                <span class="play-small"><img src="assets/images/Polygon 2.png" alt=""></span>
-                                <div class="thum-card-content">
-                                    <h6>Traditional Instruments Showcase</h6>
-                                    <small>1.8M Views</small>
-                                </div>
-                            </a>
-                        </div>
+
 
                     </div>
                     <div class="custom-arrows">
@@ -221,62 +193,31 @@
                         <h2 class="section-title text-start">Traditional Instruments Showcase</h2>
                         <p class="section-subtitle text-start">Curated collection for music lovers and connoisseurs</p>
                     </li>
-                    <li><a href="product.php">View All</a></li>
+                    <li><a href="{{ url('product') }}">View All</a></li>
                 </ul>
                 <div class="row g-4">
 
-                    <div class="col-md-4">
+                    @foreach ($pfs as $pfss)
+                        <div class="col-md-4">
 
-                        <div class="trad-card">
-                            <a href="#!">
-                                <div class="trad-img position-relative">
-                                    <img src="assets/images/product.jpg" alt="">
+                            <div class="trad-card">
+                                <a href="{{ url('product-detail/' . $pfss->slug) }}">
+                                    <div class="trad-img position-relative">
+                                        <img src="{{ url('uploads/' . $pfss->image) }}" alt="{{ $pfss->alt }}">
 
-                                </div>
-                                <div class="trad-content">
-                                    <span class="trad-main-badge">String Instrument</span>
-                                    <h6>Acoustic Guitar</h6>
+                                    </div>
+                                    <div class="trad-content">
+                                        <span class="trad-main-badge">{{ $pfss->category->name }}</span>
+                                        <h6>{{ $pfss->title }}</h6>
 
-                                </div>
-                            </a>
+                                    </div>
+                                </a>
+                            </div>
+
                         </div>
+                    @endforeach
 
-                    </div>
 
-                    <div class="col-md-4">
-
-                        <div class="trad-card">
-                            <a href="#!">
-                                <div class="trad-img position-relative">
-                                    <img src="assets/images/product.jpg" alt="">
-
-                                </div>
-                                <div class="trad-content">
-                                    <span class="trad-main-badge">String Instrument</span>
-                                    <h6>Acoustic Guitar</h6>
-
-                                </div>
-                            </a>
-                        </div>
-
-                    </div>
-                    <div class="col-md-4">
-
-                        <div class="trad-card">
-                            <a href="#!">
-                                <div class="trad-img position-relative">
-                                    <img src="assets/images/product.jpg" alt="">
-
-                                </div>
-                                <div class="trad-content">
-                                    <span class="trad-main-badge">String Instrument</span>
-                                    <h6>Acoustic Guitar</h6>
-
-                                </div>
-                            </a>
-                        </div>
-
-                    </div>
 
                 </div>
             </div>
@@ -291,62 +232,35 @@
                         <h2 class="section-title text-start">Captured Desert the Essence of Thar</h2>
                         <p class="section-subtitle text-start">One drop, a feeling of legacy</p>
                     </li>
-                    <li><a href="product.php">View All</a></li>
+                    <li><a href="{{ url('product') }}">View All</a></li>
                 </ul>
 
                 <div class="row g-4">
 
-                    <div class="col-md-4">
 
-                        <div class="trad-card">
-                            <a href="#!">
-                                <div class="trad-img position-relative">
-                                    <img src="assets/images/purfume.jpg" alt="">
 
-                                </div>
-                                <div class="trad-content">
-                                    <span class="trad-main-badge">String Instrument</span>
-                                    <h6>Acoustic Guitar</h6>
+                    @foreach ($pffs as $pffss)
+                        <div class="col-md-4">
 
-                                </div>
-                            </a>
+
+
+                            <div class="trad-card">
+                                <a href="{{ url('product-detail/' . $pffss->slug) }}">
+                                    <div class="trad-img position-relative">
+                                        <img src="{{ url('uploads/' . $pffss->image) }}" alt="{{ $pffss->alt }}">
+
+                                    </div>
+                                    <div class="trad-content">
+                                        <span class="trad-main-badge">{{ $pffss->category->name }}</span>
+                                        <h6>{{ $pffss->title }}</h6>
+
+                                    </div>
+                                </a>
+                            </div>
+
                         </div>
+                    @endforeach
 
-                    </div>
-                    <div class="col-md-4">
-
-                        <div class="trad-card">
-                            <a href="#!">
-                                <div class="trad-img position-relative">
-                                    <img src="assets/images/purfume.jpg" alt="">
-
-                                </div>
-                                <div class="trad-content">
-                                    <span class="trad-main-badge">String Instrument</span>
-                                    <h6>Acoustic Guitar</h6>
-
-                                </div>
-                            </a>
-                        </div>
-
-                    </div>
-                    <div class="col-md-4">
-
-                        <div class="trad-card">
-                            <a href="#!">
-                                <div class="trad-img position-relative">
-                                    <img src="assets/images/purfume.jpg" alt="">
-
-                                </div>
-                                <div class="trad-content">
-                                    <span class="trad-main-badge">String Instrument</span>
-                                    <h6>Acoustic Guitar</h6>
-
-                                </div>
-                            </a>
-                        </div>
-
-                    </div>
 
                 </div>
             </div>
@@ -452,77 +366,22 @@
                 <!-- GRID -->
                 <div class="row g-3">
                     <!-- CARD -->
-                    <div class="col-md-4">
-                        <div class="img-card">
-                            <img src="assets/images/heading.png">
-                            <div class="img-overlay">
-                                <div class="overlay-content">
-                                    <span class="likes">❤ 12.6k &nbsp; 💬 362</span>
-                                    <p>Desert melodies under the stars</p>
+                    @foreach ($insta as $instas)
+                        <div class="col-md-4">
+                            <div class="img-card">
+                                <img src="{{ url('uploads/' . $instas->image) }}" alt="{{ $instas->alt }}">
+                                <div class="img-overlay">
+                                    <div class="overlay-content">
+                                        <span class="likes">❤ {{ $instas->likes }} &nbsp; 💬
+                                            {{ $instas->comments }}</span>
+                                        <p>{{ $instas->title }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
 
-                    <div class="col-md-4">
-                        <div class="img-card">
-                            <img src="assets/images/heading.png">
-                            <div class="img-overlay">
-                                <div class="overlay-content">
-                                    <span class="likes">❤ 12.6k &nbsp; 💬 362</span>
-                                    <p>Desert melodies under the stars</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-md-4">
-                        <div class="img-card">
-                            <img src="assets/images/heading.png">
-                            <div class="img-overlay">
-                                <div class="overlay-content">
-                                    <span class="likes">❤ 12.6k &nbsp; 💬 362</span>
-                                    <p>Desert melodies under the stars</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="img-card">
-                            <img src="assets/images/heading.png">
-                            <div class="img-overlay">
-                                <div class="overlay-content">
-                                    <span class="likes">❤ 12.6k &nbsp; 💬 362</span>
-                                    <p>Desert melodies under the stars</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="img-card">
-                            <img src="assets/images/heading.png">
-                            <div class="img-overlay">
-                                <div class="overlay-content">
-                                    <span class="likes">❤ 12.6k &nbsp; 💬 362</span>
-                                    <p>Desert melodies under the stars</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="img-card">
-                            <img src="assets/images/heading.png">
-                            <div class="img-overlay">
-                                <div class="overlay-content">
-                                    <span class="likes">❤ 12.6k &nbsp; 💬 362</span>
-                                    <p>Desert melodies under the stars</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
             </div>
@@ -538,34 +397,42 @@
 
                 <div class="owl-carousel testimonial-slider">
 
-                    <div class="item">
-                        <div class="testimonial-card">
-                            <div class="testimonial-header">
-                                <div>
-                                    <h6 class="name">Harry Maguire</h6>
-                                    <small class="role">Music Enthusiast</small>
+
+                    @foreach ($testi as $testimonials)
+                        <div class="item">
+
+                            <div class="testimonial-card">
+                                <div class="testimonial-header">
+                                    <div>
+                                        <h6 class="name">{{ $testimonials->name }}</h6>
+                                        <small class="role">{{ $testimonials->role }}</small>
+                                    </div>
+
+                                    <div class="rating">
+
+                                        @php
+                                            $rating = $testimonials->star ?? 0;
+                                        @endphp
+
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            <span class="star {{ $i <= $rating ? 'filled' : '' }}">★</span>
+                                        @endfor
+
+                                    </div>
+
                                 </div>
 
-                                <div class="rating">
-                                    <span class="star filled">★</span>
-                                    <span class="star filled">★</span>
-                                    <span class="star filled">★</span>
-                                    <span class="star filled">★</span>
-                                    <span class="star">★</span>
+                                <div class="testimonial-body">
+                                    <img src="assets/images/quote.png" alt="quote" class="quote-img">
+
+                                    <p class="testimonial-text">
+                                        {{ $testimonials->comment }}
+                                    </p>
                                 </div>
+
                             </div>
-
-                            <div class="testimonial-body">
-                                <img src="assets/images/quote.png" alt="quote" class="quote-img">
-
-                                <p class="testimonial-text">
-                                    UI Wikir transformed our design process! The templates are
-                                    modern, user-friendly, and saved us countless hours
-                                </p>
-                            </div>
-
                         </div>
-                    </div>
+                    @endforeach
 
                 </div>
                 <div class="custom-arrows">

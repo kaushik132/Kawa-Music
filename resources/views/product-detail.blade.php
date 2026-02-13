@@ -100,7 +100,11 @@
                             @endif
 
                         </div>
-
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
 
                         <a href="#" class="inquiry-btn" data-bs-toggle="modal" data-bs-target="#inquiryModal">
                             Send Inquiry <i class="fa-solid fa-arrow-right"></i>
@@ -182,35 +186,32 @@
                     <li><a href="{{ url('product') }}">View All</a></li>
                 </ul>
                 <div class="row g-4">
-{{-- start --}}
+                    {{-- start --}}
 
-@foreach ($allproduct as $ap)
+                    @foreach ($allproduct as $ap)
+                        <div class="col-md-4">
+                            <div class="trad-card">
+                                <a href="{{ url('product-detail/' . $ap->slug) }}">
+                                    <div class="trad-img position-relative">
+                                        <img src="{{ url('uploads/' . $ap->image) }}" alt="{{ $ap->alt }}">
 
+                                        <span class="enquiry-badge">
+                                            <small>Send Inquiry</small>
+                                        </span>
+                                    </div>
+                                    <div class="trad-content">
+                                        <span class="trad-main-badge">{{ $ap->category->name ?? '' }}</span>
+                                        <h6>{{ $ap->title }}</h6>
+                                    </div>
 
-                    <div class="col-md-4">
-                        <div class="trad-card">
-                            <a href="{{ url('product-detail/' . $ap->slug) }}">
-                                <div class="trad-img position-relative">
-                                    <img src="{{ url('uploads/' . $ap->image)}}" alt="{{ $ap->alt }}">
+                                </a>
 
-                                    <span class="enquiry-badge">
-                                        <small>Send Inquiry</small>
-                                    </span>
-                                </div>
-                                <div class="trad-content">
-                                    <span class="trad-main-badge">{{ $ap->category->name ?? '' }}</span>
-                                    <h6>{{ $ap->title }}</h6>
-                                </div>
-
-                            </a>
-
+                            </div>
                         </div>
-                    </div>
-
                     @endforeach
 
                     {{-- end  --}}
-              
+
 
 
 
@@ -241,40 +242,69 @@
                     <h4 class="modal-title">Send Product Inquiry</h4>
                     <p class="modal-subtitle">
                         Fill in your details and we'll get back to you within 24 hours to process
-                        your order for <strong>Acoustic Guitar – Professional</strong>.
+                        your order for <strong>{{ $productData->title }}</strong>.
                     </p>
 
-                    <form>
+
+
+                    <form action="{{ route('inquiry.store') }}" method="POST">
+                        @csrf
+
+                        <input type="hidden" name="product_title" value="{{ $productData->title }}">
+                        <input type="hidden" name="product_id" value="{{ $productData->id }}">
+
                         <div class="mb-3">
                             <label>Full Name</label>
-                            <input type="text" placeholder="Enter your full name">
+                            <input type="text" name="name" value="{{ old('name') }}"
+                             oninput="this.value = this.value.replace(/[^A-Za-z+. ]/g, '').replace(/(\..*?)\..*/g, '$1');"
+                                class="@error('name') is-invalid @enderror" placeholder="Enter your full name">
+                            <span class="text-danger">
+                                @error('name')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </div>
 
                         <div class="mb-3">
                             <label>Email Address</label>
-                            <input type="email" placeholder="your.email@example.com">
+                            <input type="email" name="email" value="{{ old('email') }}"
+                                class="@error('email') is-invalid @enderror" placeholder="your.email@example.com">
+                            <span class="text-danger">
+                                @error('email')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </div>
 
                         <div class="mb-3">
                             <label>Phone Number</label>
-                            <input type="text" placeholder="Enter your number">
+                            <input type="text" name="phone" value="{{ old('phone') }}"
+                             oninput="this.value = this.value.replace(/[^0-9+.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+                                class="@error('phone') is-invalid @enderror" placeholder="Enter your number">
+                            <span class="text-danger">
+                                @error('phone')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </div>
 
                         <div class="mb-3">
-                            <label>Delivery Address</label>
-                            <textarea rows="2" placeholder="Enter your complete delivery address"></textarea>
+                            <label>Address</label>
+                            <textarea name="address" rows="2" class="@error('address') is-invalid @enderror"
+                                placeholder="Enter your complete delivery address">{{ old('address') }}</textarea>
+                            <span class="text-danger">
+                                @error('address')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </div>
 
                         <div class="mb-4">
                             <label>Additional Notes</label>
-                            <textarea rows="2" placeholder="Any specific requirement and question?"></textarea>
+                            <textarea name="notes" rows="2" placeholder="Any specific requirement and question?">{{ old('notes') }}</textarea>
                         </div>
 
-                        <!-- SUMMARY -->
-                        <div class="product-summary">
-                            <span>Product Summary</span>
-                            <strong>₹15,999</strong>
-                        </div>
+
 
                         <!-- ACTIONS -->
                         <div class="modal-actions">
@@ -287,6 +317,7 @@
                         </div>
 
                     </form>
+
 
                 </div>
             </div>

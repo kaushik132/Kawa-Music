@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +26,10 @@ Route::get('product/{slug?}',[HomeController::class, 'product']);
 Route::get('product-detail/{slug?}',[HomeController::class, 'productDetail']);
 
 
+// post
+Route::post('/contact-submit', [HomeController::class, 'store'])->name('contact.submit');
+Route::post('/product-inquiry', [HomeController::class, 'productstore'])->name('inquiry.store');
+
+//sitemap.xml
+Route::get('sitemap.xml',[SitemapController::class, 'index']);
 

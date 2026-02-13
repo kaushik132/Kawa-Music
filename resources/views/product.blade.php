@@ -56,7 +56,7 @@
 
 
                             <div class="trad-card">
-                                <a href="{{ url('product-detail/'.$productLists->slug) }}">
+                                <a href="{{ url('product-detail/' . $productLists->slug) }}">
                                     <div class="trad-img position-relative">
                                         <img src="{{ url('uploads/' . $productLists->image) }}"
                                             alt="{{ $productLists->alt }}">

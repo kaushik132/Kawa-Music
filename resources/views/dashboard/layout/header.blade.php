@@ -4,7 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kawa Musics</title>
+    @if (isset($seo_data['seo_title']))
+        <title>{{ $seo_data['seo_title'] }}</title>
+    @endif
+
+    @if (isset($seo_data['seo_description']))
+        <meta name="description" content="{{ $seo_data['seo_description'] }}" />
+    @endif
+
+    @if (isset($seo_data['keywords']))
+        <meta name="keywords" content="{{ $seo_data['keywords'] }}" />
+    @endif
+
+
+    <meta property="og:title" content="{{ $seo_data['seo_title'] }}">
+    <meta property="og:site_name" content="Codepin">
+
+    @if (isset($canocial))
+        <meta property="og:url" content="{{ $canocial }}">
+    @endif
+
+    <meta property="og:description" content="{{ $seo_data['seo_description'] }}">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{{ url('uploads/' . $seo_data['seo_image']) }}">
 
     <link rel="icon" type="image/png" href="{{ asset('assets/images/favicon.png') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/owl.theme.default.min.css') }}" type="text/css">
@@ -26,6 +48,19 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,hi,fr',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 
 </head>
 
@@ -75,9 +110,10 @@
                                                 @foreach ($artistlist as $artistlists)
                                                     <a href="{{ url('artist/' . $artistlists->slug) }}"
                                                         class="artist-card">
-                                                        <img src="{{ url('uploads/' . $artistlists->image) }}" alt="">
-                                                        <h6>{{$artistlists->artist_name}}</h6>
-                                                        <span>{{$artistlists->artist_role}}</span>
+                                                        <img src="{{ url('uploads/' . $artistlists->image) }}"
+                                                            alt="">
+                                                        <h6>{{ $artistlists->artist_name }}</h6>
+                                                        <span>{{ $artistlists->artist_role }}</span>
                                                     </a>
                                                 @endforeach
 
@@ -99,12 +135,12 @@
                                             <div class="artist-row">
 
                                                 @foreach ($pf as $pfs)
+                                                    <a href="{{ url('product/' . $pfs->slug) }}" class="artist-card">
+                                                        <img src="{{ url('uploads/' . $pfs->image) }}"
+                                                            alt="{{ $pfs->alt }}">
+                                                        <h6>{{ $pfs->name }}</h6>
 
-                                                <a href="{{ url('product/'. $pfs->slug) }}" class="artist-card">
-                                                    <img src="{{url('uploads/'.$pfs->image)}}" alt="{{$pfs->alt}}">
-                                                    <h6>{{$pfs->name}}</h6>
-
-                                                </a>
+                                                    </a>
                                                 @endforeach
 
 
@@ -124,6 +160,8 @@
                                 </ul>
 
                                 <div class="lang-dropdown">
+                                    <div id="google_translate_element" style="display:none;"></div>
+
                                     <div class="lang-selected">
                                         English
                                         <i class="fa-solid fa-angle-down"></i>
@@ -143,4 +181,21 @@
                 </div>
             </div>
         </div>
+     
+
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'en',
+                    includedLanguages: 'en,hi,fr',
+                    autoDisplay: false
+                }, 'google_translate_element');
+            }
+        </script>
+
+        <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+
+
     </header>

@@ -28,7 +28,7 @@
                 <div class="row g-4">
 
                     <!-- top BIG BLOG -->
-                    <div class="col-lg-4">
+                    {{-- <div class="col-lg-4">
                         <a href="{{ url('blog-detail') }}">
                             <div class="blog-card blog-large p-0">
                                 <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="">
@@ -42,8 +42,8 @@
                                 </div>
                             </div>
                         </a>
-                    </div>
-                    <div class="col-lg-4">
+                    </div> --}}
+                    {{-- <div class="col-lg-4">
                         <a href="{{ url('blog-detail') }}">
                             <div class="blog-card blog-large p-0">
                                 <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="">
@@ -57,8 +57,8 @@
                                 </div>
                             </div>
                         </a>
-                    </div>
-                    <div class="col-lg-4">
+                    </div> --}}
+                    {{-- <div class="col-lg-4">
                         <a href="{{ url('blog-detail') }}">
                             <div class="blog-card blog-large p-0">
                                 <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="">
@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                         </a>
-                    </div>
+                    </div> --}}
 
 
                     <h2 class="section-title">Latest Articles</h2>
